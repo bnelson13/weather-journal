@@ -22,10 +22,11 @@ function clickWeather(e) {
             weather: data.weather[0].description,
             date: newDate,
             feelings: feelings
-        }).then(
+            })
+    })
+    .then(
         function(){ 
             updateUI()
-        })
     })
 }
 
@@ -69,9 +70,12 @@ const postData = async ( url = '', data = {})=>{
     const request = await fetch('/all');
     try{
         const allData = await request.json();
-        document.getElementById('date').innerHTML = allData.date;
-        document.getElementById('temp').innerHTML = allData.temp;
-        document.getElementById('content').innerHTML = allData.feelings;
+        console.log(allData[0].date);
+        console.log(allData[0].temperature);
+        console.log(allData[0].feelings);
+        document.getElementById('date').innerHTML = `Today's date is ${allData[0].date}`;
+        document.getElementById('temp').innerHTML = `Current Temperature is ${allData[0].temperature}`;
+        document.getElementById('content').innerHTML = allData[0].feelings;
     } catch (error) {
         console.log("Update Error", error);
     }
