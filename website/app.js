@@ -22,7 +22,10 @@ function clickWeather(e) {
             weather: data.weather[0].description,
             date: newDate,
             feelings: feelings
-        }).then(updateUI)
+        }).then(
+        function(){ 
+            updateUI()
+        })
     })
 }
 
