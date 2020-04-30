@@ -23,8 +23,8 @@ function clickWeather(e) {
         return;
     }
     console.log(`Retrieving Weather for: ${zipCode}`);
-    getWeatherInfo(apiUrl, zipCode, apiKey)
-    try{
+    try {
+        getWeatherInfo(apiUrl, zipCode, apiKey)
         .then(function(data){
             console.log(data);
             postData('/post', {
