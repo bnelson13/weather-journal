@@ -1,0 +1,25 @@
+{
+  "name": "weather-journal-app",
+  "version": "1.0.0",
+  "description": "Updates DOM with weather data from API and user journal entry",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bnelson13/weather-journal.git"
+  },
+  "author": "Brad Nelson, 2020",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bnelson13/weather-journal/issues"
+  },
+  "homepage": "https://github.com/bnelson13/weather-journal#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}

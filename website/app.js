@@ -9,27 +9,42 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 document.getElementById('generate').addEventListener('click', clickWeather);
 
+// Async function following user clicking on generate button
 function clickWeather(e) {
-    let zipCode = document.getElementById('zipCode').value;
-    let feelings = document.getElementById('feelings').value
+    e.preventDefault();
+    const zipCode = document.getElementById('zip').value;
+    const feelings = document.getElementById('feelings').value
+    if(zipCode.length == 0) {
+        alert("Please enter a zip code");
+        return;
+    }
+    if(feelings.length == 0) {
+        alert("Please enter a journal entry");
+        return;
+    }
     console.log(`Retrieving Weather for: ${zipCode}`);
     getWeatherInfo(apiUrl, zipCode, apiKey)
-    .then(function(data){
-        postData('/post', {
-            temperature: data.main.temp,
-            sunrise: getTime(data.sys.sunrise),
-            sunset: getTime(data.sys.sunset),
-            weather: data.weather[0].description,
-            date: newDate,
-            feelings: feelings
+    try{
+        .then(function(data){
+            console.log(data);
+            postData('/post', {
+                temperature: data.main.temp,
+                sunrise: getTime(data.sys.sunrise),
+                sunset: getTime(data.sys.sunset),
+                weather: data.weather[0].description,
+                date: newDate,
+                feelings: feelings
             })
-    })
-    .then(
-        function(){ 
+        })
+        .then(function(){ 
             updateUI()
-    })
+        })
+    } catch(error) {
+        console.log('Oops, Error: ', error);
+    }
 }
 
+// Returns time of day.
 function getTime(unix) {
     let date = new Date(unix * 1000);
     let hours = date.getHours();
@@ -37,6 +52,7 @@ function getTime(unix) {
     return `${hours}:${minutes.substr(-2)}`;
 }
 
+// Async function to fetch weather data from API
 const getWeatherInfo = async (apiUrl, zip, key) => {
     const res = await fetch(apiUrl+zip+key)
     try {
@@ -47,6 +63,7 @@ const getWeatherInfo = async (apiUrl, zip, key) => {
     }
 }
 
+// Async function to catch Post routes from server
 const postData = async ( url = '', data = {})=>{
       const response = await fetch(url, {
       method: 'POST', 
@@ -66,16 +83,19 @@ const postData = async ( url = '', data = {})=>{
       }
   }
 
+  // Async function that will update the HTML
+  let xHold = 0;
   const updateUI = async () => {
     const request = await fetch('/all');
     try{
         const allData = await request.json();
-        console.log(allData[0].date);
-        console.log(allData[0].temperature);
-        console.log(allData[0].feelings);
-        document.getElementById('date').innerHTML = `Today's date is ${allData[0].date}`;
-        document.getElementById('temp').innerHTML = `Current Temperature is ${allData[0].temperature}`;
-        document.getElementById('content').innerHTML = allData[0].feelings;
+        console.log(allData[xHold].date);
+        console.log(allData[xHold].temperature);
+        console.log(allData[xHold].feelings);
+        document.getElementById('date').innerHTML = `Date: ${allData[xHold].date}`;
+        document.getElementById('temp').innerHTML = `Temperature: ${allData[xHold].temperature}F`;
+        document.getElementById('content').innerHTML = `Entry: ${allData[xHold].feelings}`;
+        xHold += 1;
     } catch (error) {
         console.log("Update Error", error);
     }

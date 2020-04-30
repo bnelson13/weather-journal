@@ -7,11 +7,10 @@ const express = require('express');
 // Start up an instance of app
 const app = express();
 
-/* Dependencies */
+// Dependencies
 const bodyParser = require('body-parser')
 
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+// Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -24,7 +23,6 @@ app.use(express.static('website'));
 
 // Setup Server
 const port = 3000;
-
 const server = app.listen(port, () => {
     console.log(`Server Running on Port: ${port}`);
 });
