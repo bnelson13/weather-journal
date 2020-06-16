@@ -1,7 +1,27 @@
-# Weather-Journal App Project
+# Weather Journal
 
-## Overview
-This is the project for the third section of Udacity's Front End Nanodegree.  
+The weather journal allows a user to submit their zip code and a some text and it creates a journal entry with today's date, the text that was entered and then uses Open Weather's API to return the temperature at the time of the entry.
 
-## Instructions
-Server.js creates its own server through Node.js with dependecies of express, body-parser, and cors modules. Download these dependencies through NPM first. The server is run on localhost port 3000 and will start after running node server.js from terminal. 
+## Installation
+
+Use the npm package manager to install dependencies.
+
+```bash
+npm install
+```
+
+## Usage
+
+You will need to run the server with the following command
+
+```bash
+npm run start
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

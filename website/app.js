@@ -1,6 +1,6 @@
 /* Global Variables */
-let apiKey = ',us&units=imperial&appid=1f266d1da0b22f5b7297aefc1736a750';
-let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+const apiKey = ',us&units=imperial&appid=1f266d1da0b22f5b7297aefc1736a750';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 
 
 // Create a new date instance dynamically with JS
@@ -14,7 +14,7 @@ function clickWeather(e) {
     e.preventDefault();
     const zipCode = document.getElementById('zip').value;
     const feelings = document.getElementById('feelings').value
-    if(zipCode.length == 0) {
+    if(!zipCode.length) {
         alert("Please enter a zip code");
         return;
     }
